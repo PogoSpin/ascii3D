@@ -8,3 +8,7 @@ class Vector2d:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
+class Position(Vector3d):
+    def __init__(self, x, y, z):
+        super().__init__(x, y, z)
