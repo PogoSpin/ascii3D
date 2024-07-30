@@ -80,13 +80,16 @@ class Screen(Grid):
 
 
 def bresenhamLine(pos1: Vector2d, pos2: Vector2d) -> list[Vector2d]:
+    x0, y0 = pos1.x, pos1.y
+    x1, y1 = pos2.x, pos2.y
+
     # Calculate differences
-    dx = abs(pos2.x - pos1.x)
-    dy = abs(pos2.y - pos1.y)
+    dx = abs(x1 - x0)
+    dy = abs(y1 - y0)
     
     # Determine the direction of the increment
-    sx = 1 if pos1.x < pos2.x else -1
-    sy = 1 if pos1.y < pos2.y else -1
+    sx = 1 if x0 < x1 else -1
+    sy = 1 if y0 < y1 else -1
     
     # Initialize the error term
     err = dx - dy
@@ -96,19 +99,19 @@ def bresenhamLine(pos1: Vector2d, pos2: Vector2d) -> list[Vector2d]:
 
     while True:
         # Add the current point to the line
-        linePoints.append(Vector2d(pos1.x, pos1.y))
+        linePoints.append(Vector2d(x0, y0))
         
         # Check if the end point is reached
-        if pos1.x == pos2.x and pos1.y == pos2.y:
+        if x0 == x1 and y0 == y1:
             break
         
         # Calculate the error terms
         e2 = 2 * err
         if e2 > -dy:
             err -= dy
-            pos1.x += sx
+            x0 += sx
         if e2 < dx:
             err += dx
-            pos1.y += sy
+            y0 += sy
     
     return linePoints
