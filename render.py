@@ -1,6 +1,6 @@
 from lib import Vector2d, Screen
 
-class Rederer:
+class Renderer:
     def __init__(self, windowSize: Vector2d):
         self.width = windowSize.x
         self.height = windowSize.y
