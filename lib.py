@@ -1,16 +1,16 @@
 class Vector3d:
-    def __init__(self, x, y, z):
+    def __init__(self, x: float, y: float, z: float):
         self.x = x
         self.y = y
         self.z = z
 
 class Vector2d:
-    def __init__(self, x, y):
+    def __init__(self, x: float, y: float):
         self.x = x
         self.y = y
 
 class Position(Vector3d):
-    def __init__(self, x, y, z):
+    def __init__(self, x: float, y: float, z: float):
         super().__init__(x, y, z)
 
 class Pixel:
@@ -43,7 +43,7 @@ class Grid:
             self.initializeValues(self.initialValues)
         
 
-    def initializeValues(self, valueToInitialize = None):
+    def initializeValues(self, valueToInitialize: any = None):
             for _ in range(self.width * self.height):
                 self.values.append(valueToInitialize)
 
@@ -61,7 +61,7 @@ class Grid:
 
         self.values[self.getIndexFromVector(row, column)] = value
 
-    def getIndexFromVector(self, row: int = None, column: int = None, pos: Vector2d = None):
+    def getIndexFromVector(self, row: int = None, column: int = None, pos: Vector2d = None) -> int:
         if pos:
             row = pos.x
             column = pos.y
@@ -74,4 +74,4 @@ class Grid:
 
 class Screen(Grid):
     def __init__(self, size: Vector2d, values: list = None):
-        super().__init__(size, initialValues = Pixel())
+        super().__init__(size, values = values, initialValues = Pixel())
