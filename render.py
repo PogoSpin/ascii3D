@@ -1,4 +1,4 @@
-from lib import Vector2d, Screen
+from lib import Vector2d, Screen, bresenhamLine
 
 class Renderer:
     def __init__(self, windowSize: Vector2d):
@@ -25,5 +25,6 @@ class Renderer:
             self.screen.get(pos = pos).setBrightness(1)
 
         def line(self, pos1: Vector2d, pos2: Vector2d):
-            # algorithm to draw line
-            pass
+            pixelsOn = bresenhamLine(pos1, pos2)
+            for pixelPos in pixelsOn:
+                self.point(pixelPos)
