@@ -11,11 +11,19 @@ class Renderer:
 
     def display(self):
         # print to screen
+        frameToPrint = ''
         for row in range(self.height):
-            printString = ''
+            rowToPrint = ''
             for column in range(self.width):
-                printString += self.screen.get(column, row).char
-            print(printString)
+                rowToPrint += self.screen.get(column, row).char
+            frameToPrint += f'{rowToPrint}\n'
+        Renderer.renderPrint(frameToPrint[:-1])
+
+    def renderPrint(text):
+        # clear the terminal screen and move the cursor to topleft corner, ANSI escape code
+        print("\033[H\033[J", end="")
+        # print the text
+        print(text)
 
     class Draw:
         def __init__(self, screen: Screen):
