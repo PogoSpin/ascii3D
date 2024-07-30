@@ -50,22 +50,22 @@ class Grid:
 
     def get(self, row: int = None, column: int = None, pos: Vector2d = None) -> any:
         if pos:
-            row = pos.x
-            column = pos.y
+            row = pos.y
+            column = pos.x
 
         return self.values[self.getIndexFromVector(row, column)]
     
     def set(self, value, row: int = None, column: int = None, pos: Vector2d = None):
         if pos:
-            row = pos.x
-            column = pos.y
+            row = pos.y
+            column = pos.x
 
         self.values[self.getIndexFromVector(row, column)] = value
 
     def getIndexFromVector(self, row: int = None, column: int = None, pos: Vector2d = None) -> int:
         if pos:
-            row = pos.x
-            column = pos.y
+            row = pos.y
+            column = pos.x
 
         return row + (self.width * column)
     
