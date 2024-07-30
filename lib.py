@@ -79,7 +79,7 @@ class Screen(Grid):
         super().__init__(size, values)
 
 
-def bresenhamLine(pos1, pos2):
+def bresenhamLine(pos1: Vector2d, pos2: Vector2d) -> list[Vector2d]:
     # Calculate differences
     dx = abs(pos2.x - pos1.x)
     dy = abs(pos2.y - pos1.y)
