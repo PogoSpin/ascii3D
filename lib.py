@@ -52,14 +52,21 @@ class Matrix:
             row = pos.x
             column = pos.y
 
-        return self.values[row + (self.width * column)]
+        return self.values[self.getIndexFromVector(row, column)]
     
     def set(self, value, row: int = None, column: int = None, pos: Vector2d = None):
         if pos:
             row = pos.x
             column = pos.y
 
-        self.values[row + (self.width * column)] = value
+        self.values[self.getIndexFromVector(row, column)] = value
+
+    def getIndexFromVector(self, row: int = None, column: int = None, pos: Vector2d = None):
+        if pos:
+            row = pos.x
+            column = pos.y
+
+        return row + (self.width * column)
     
     def getVectorFromIndex(self, n: int) -> Vector2d:
         return Vector2d(n % self.width, n // self.width)
