@@ -11,10 +11,10 @@ class Renderer:
 
     def display(self):
         # print to screen
-        for row in range(self.width):
+        for row in range(self.height):
             printString = ''
-            for column in range(self.height):
-                printString += self.screen.get(row, column).char
+            for column in range(self.width):
+                printString += self.screen.get(column, row).char
             print(printString)
 
     class Draw:
