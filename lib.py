@@ -30,7 +30,7 @@ class Pixel:
     def getCharFromBrightness(brightness: float) -> str:
         return Pixel.charset[round(brightness * len(Pixel.charset))]
 
-class Matrix:
+class Grid:
     def __init__(self, size: Vector2d, values: list = None, initialValues = None):
         self.width = size.x
         self.height = size.y
@@ -72,6 +72,6 @@ class Matrix:
         return Vector2d(n % self.width, n // self.width)
     
 
-class Grid(Matrix):
+class Screen(Grid):
     def __init__(self, size: Vector2d, values: list = None):
         super().__init__(size, initialValues = Pixel())
