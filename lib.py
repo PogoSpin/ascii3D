@@ -18,7 +18,13 @@ class Pixel:
 
     def __init__(self, brightness: float = 0):
         self.brightness = brightness  # 0-1
+        self.char = Pixel.getCharFromBrightness(self.brightness)
 
+    def setBrightness(self, value: float):
+        self.brightness = value
+        self.updateChar()
+
+    def updateChar(self):
         self.char = Pixel.getCharFromBrightness(self.brightness)
     
     def getCharFromBrightness(brightness: float) -> str:
