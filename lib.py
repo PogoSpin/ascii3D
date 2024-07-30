@@ -75,5 +75,40 @@ class Grid:
 
 class Screen(Grid):
     def __init__(self, size: Vector2d, values: list = None):
-        values = [Pixel() for _ in range(size.x * size.y)]
+        values = [Pixel(0) for _ in range(size.x * size.y)]
         super().__init__(size, values)
+
+
+def bresenhamLine(pos1, pos2):
+    # Calculate differences
+    dx = abs(pos2.x - pos1.x)
+    dy = abs(pos2.y - pos1.y)
+    
+    # Determine the direction of the increment
+    sx = 1 if pos1.x < pos2.x else -1
+    sy = 1 if pos1.y < pos2.y else -1
+    
+    # Initialize the error term
+    err = dx - dy
+    
+    # List to store the points of the line as Vector2d
+    linePoints = []
+
+    while True:
+        # Add the current point to the line
+        linePoints.append(Vector2d(pos1.x, pos1.y))
+        
+        # Check if the end point is reached
+        if pos1.x == pos2.x and pos1.y == pos2.y:
+            break
+        
+        # Calculate the error terms
+        e2 = 2 * err
+        if e2 > -dy:
+            err -= dy
+            pos1.x += sx
+        if e2 < dx:
+            err += dx
+            pos1.y += sy
+    
+    return linePoints
