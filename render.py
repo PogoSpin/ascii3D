@@ -21,10 +21,20 @@ class Renderer:
         def __init__(self, screen: Screen):
             self.screen = screen
 
+            self.changes = []
+
         def point(self, pos: Vector2d):
             self.screen.get(pos = pos).setBrightness(1)
+            self.changes.append(pos)
+
+        def erase(self, pos: Vector2d):
+            self.screen.get(pos = pos).setBrightness(0)
 
         def line(self, pos1: Vector2d, pos2: Vector2d):
             pixelsOn = bresenhamLine(pos1, pos2)
             for pixelPos in pixelsOn:
                 self.point(pixelPos)
+
+        def undoDrawings(self):
+            for change in self.changes:
+                self.erase(change)
