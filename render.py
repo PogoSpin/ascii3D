@@ -11,9 +11,9 @@ class Renderer:
 
     def display(self):
         # print to screen
-        for row in range(self.height):
+        for row in range(self.width):
             printString = ''
-            for column in range(self.width):
+            for column in range(self.height):
                 printString += self.screen.get(row, column).char
             print(printString)
 
