@@ -35,7 +35,7 @@ class Matrix:
         self.width = size.x
         self.height = size.y
 
-        self.initializeValues = initialValues
+        self.initialValues = initialValues
 
         self.values = []
 
