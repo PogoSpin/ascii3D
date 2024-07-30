@@ -48,26 +48,26 @@ class Grid:
             for _ in range(self.width * self.height):
                 self.values.append(valueToInitialize)
 
-    def get(self, row: int = None, column: int = None, pos: Vector2d = None) -> any:
+    def get(self, column: int = None, row: int = None, pos: Vector2d = None) -> any:
         if pos:
-            row = pos.y
             column = pos.x
+            row = pos.y
 
-        return self.values[self.getIndexFromVector(row, column)]
+        return self.values[self.getIndexFromVector(column, row)]
     
-    def set(self, value, row: int = None, column: int = None, pos: Vector2d = None):
+    def set(self, value, column: int = None, row: int = None, pos: Vector2d = None):
         if pos:
-            row = pos.y
             column = pos.x
+            row = pos.y
 
-        self.values[self.getIndexFromVector(row, column)] = value
+        self.values[self.getIndexFromVector(column, row)] = value
 
-    def getIndexFromVector(self, row: int = None, column: int = None, pos: Vector2d = None) -> int:
+    def getIndexFromVector(self, column: int = None, row: int = None, pos: Vector2d = None) -> int:
         if pos:
-            row = pos.y
             column = pos.x
+            row = pos.y
 
-        return row + (self.width * column)
+        return column + (self.width * row)
     
     def getVectorFromIndex(self, n: int) -> Vector2d:
         return Vector2d(n % self.width, n // self.width)
