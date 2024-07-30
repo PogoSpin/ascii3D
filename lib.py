@@ -37,13 +37,14 @@ class Grid:
 
         self.initialValues = initialValues
 
-        self.values = []
-
-        if not values:
+        if values:
+            self.values = values
+        else:
             self.initializeValues(self.initialValues)
         
 
     def initializeValues(self, valueToInitialize: any = None):
+            self.values = []
             for _ in range(self.width * self.height):
                 self.values.append(valueToInitialize)
 
@@ -74,4 +75,5 @@ class Grid:
 
 class Screen(Grid):
     def __init__(self, size: Vector2d, values: list = None):
-        super().__init__(size, values = values, initialValues = Pixel())
+        values = [Pixel() for _ in range(size.x * size.y)]
+        super().__init__(size, values)
