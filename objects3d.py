@@ -24,6 +24,16 @@ class Position(Vector3d):
         super().__init__(x, y, z)
         
 class Cube:
-    def __init__(self, pos: Position, size: Vector3d):
+    def __init__(self, pos: Position, size: float | Vector3d):
         self.pos = pos
-        self.size = size
+
+        if type(size) == Vector3d:
+            self.size = size
+        else:
+            self.size = Vector3d(size, size, size)
+
+        self.verticies = [self.pos, self.pos + Vector3d(self.size.x, 0, 0), self.pos + Vector3d(0, self.size.y, 0), 
+                          self.pos + Vector3d(self.size.x, self.size.y, 0), self.pos + Vector3d(0, 0, self.size.z), 
+                          self.pos + Vector3d(self.size.x, 0, self.size.z), self.pos + Vector3d(0, self.size.y, self.size.z), 
+                          self.pos + self.size]
+        
