@@ -3,6 +3,19 @@ class Vector2d:
         self.x = x
         self.y = y
 
+    def __add__(self, other):
+        if isinstance(other, Vector2d):
+            return Vector2d(self.x + other.x, self.y + other.y)
+        return NotImplemented
+        
+    def __sub__(self, other):
+        if isinstance(other, Vector2d):
+            return Vector2d(self.x - other.x, self.y - other.y)
+        return NotImplemented
+    
+    def __repr__(self) -> str:
+        return f'({self.x}, {self.y})'
+
 class Pixel:
     charset = [' ', '.', ':', '-', '=', '+', '#', '@']
 
