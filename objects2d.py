@@ -51,43 +51,27 @@ class Grid:
             for _ in range(self.width * self.height):
                 self.values.append(valueToInitialize)
 
-    def get(self, column: int = None, row: int = None, pos: Vector2d = None) -> any:
-        if pos:
-            column = pos.x
-            row = pos.y
-
-        if self._checkCellWithinGrid(column, row):
-            return self.values[self.getIndexFromVector(column, row)]
+    def get(self, pos: Vector2d = None) -> any:
+        if self._checkCellWithinGrid(pos):
+            return self.values[self.getIndexFromVector(pos)]
         raise IndexError
     
-    def set(self, value, column: int = None, row: int = None, pos: Vector2d = None):
-        if pos:
-            column = pos.x
-            row = pos.y
-
-        if self._checkCellWithinGrid(column, row):
-            self.values[self.getIndexFromVector(column, row)] = value
+    def set(self, value, pos: Vector2d = None):
+        if self._checkCellWithinGrid(pos):
+            self.values[self.getIndexFromVector(pos)] = value
         else:
             raise IndexError
 
-    def getIndexFromVector(self, column: int = None, row: int = None, pos: Vector2d = None) -> int:
-        if pos:
-            column = pos.x
-            row = pos.y
-
-        if self._checkCellWithinGrid(column, row):
-            return column + (self.width * row)
+    def getIndexFromVector(self, pos: Vector2d = None) -> int:
+        if self._checkCellWithinGrid(pos):
+            return pos.x + (self.width * pos.y)
         raise IndexError
     
     def getVectorFromIndex(self, n: int) -> Vector2d:
         return Vector2d(n % self.width, n // self.width)
     
-    def _checkCellWithinGrid(self, column: int = None, row: int = None, pos: Vector2d = None):
-        if pos:
-            column = pos.x
-            row = pos.y
-
-        if column < self.width and row < self.height:
+    def _checkCellWithinGrid(self, pos: Vector2d = None) -> bool:
+        if pos.x < self.width and pos.y < self.height:
             return True
         return False
 

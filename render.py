@@ -16,7 +16,7 @@ class Renderer:
         for row in range(self.height):
             rowToPrint = ''
             for column in range(self.width):
-                rowToPrint += self.screen.get(column, row).char
+                rowToPrint += self.screen.get(Vector2d(column, row)).char
             frameToPrint += f'{rowToPrint}\n'
         Renderer.renderPrint(frameToPrint[:-1])
 
@@ -33,11 +33,14 @@ class Renderer:
             self.changes = []
 
         def point(self, pos: Vector2d):
-            self.screen.get(pos = pos).setBrightness(1)
-            self.changes.append(pos)
+            try:
+                self.screen.get(pos).setBrightness(1)
+                self.changes.append(pos)
+            except:
+                pass
 
         def erase(self, pos: Vector2d):
-            self.screen.get(pos = pos).setBrightness(0)
+            self.screen.get(pos).setBrightness(0)
 
         def line(self, pos1: Vector2d, pos2: Vector2d):
             pixelsOn = bresenhamLine(pos1, pos2)
