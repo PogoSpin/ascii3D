@@ -1,4 +1,4 @@
-from lib import Vector2d, Screen, bresenhamLine
+from objects2d import Vector2d, Screen, bresenhamLine
 
 class Renderer:
     def __init__(self, windowSize: Vector2d):

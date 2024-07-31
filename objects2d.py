@@ -1,17 +1,7 @@
-class Vector3d:
-    def __init__(self, x: float, y: float, z: float):
-        self.x = x
-        self.y = y
-        self.z = z
-
 class Vector2d:
     def __init__(self, x: float, y: float):
         self.x = x
         self.y = y
-
-class Position(Vector3d):
-    def __init__(self, x: float, y: float, z: float):
-        super().__init__(x, y, z)
 
 class Pixel:
     charset = [' ', '.', ':', '-', '=', '+', '#', '@']
@@ -77,6 +67,11 @@ class Screen(Grid):
     def __init__(self, size: Vector2d, values: list = None):
         values = [Pixel(0) for _ in range(size.x * size.y)]
         super().__init__(size, values)
+
+class Triangle:
+    def __init__(self, points: tuple[Vector2d]):
+        self.points = points
+        self.pairings = ((self.points[0], self.points[1]), (self.points[1], self.points[2]), (self.points[2], self.points[0]))
 
 
 def bresenhamLine(pos1: Vector2d, pos2: Vector2d) -> list[Vector2d]:
