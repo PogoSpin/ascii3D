@@ -43,6 +43,10 @@ class Renderer:
             for pixelPos in pixelsOn:
                 self.point(pixelPos)
 
+        def triangle(self, trianglePairings):
+            for pair in trianglePairings:
+                self.line(pair[0], pair[1])
+
         def undoDrawings(self):
             for change in self.changes:
                 self.erase(change)
