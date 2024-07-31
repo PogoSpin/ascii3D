@@ -56,25 +56,40 @@ class Grid:
             column = pos.x
             row = pos.y
 
-        return self.values[self.getIndexFromVector(column, row)]
+        if self._checkCellWithinGrid(column, row):
+            return self.values[self.getIndexFromVector(column, row)]
+        raise IndexError
     
     def set(self, value, column: int = None, row: int = None, pos: Vector2d = None):
         if pos:
             column = pos.x
             row = pos.y
 
-        self.values[self.getIndexFromVector(column, row)] = value
+        if self._checkCellWithinGrid(column, row):
+            self.values[self.getIndexFromVector(column, row)] = value
+        else:
+            raise IndexError
 
     def getIndexFromVector(self, column: int = None, row: int = None, pos: Vector2d = None) -> int:
         if pos:
             column = pos.x
             row = pos.y
 
-        return column + (self.width * row)
+        if self._checkCellWithinGrid(column, row):
+            return column + (self.width * row)
+        raise IndexError
     
     def getVectorFromIndex(self, n: int) -> Vector2d:
         return Vector2d(n % self.width, n // self.width)
     
+    def _checkCellWithinGrid(self, column: int = None, row: int = None, pos: Vector2d = None):
+        if pos:
+            column = pos.x
+            row = pos.y
+
+        if column < self.width and row < self.height:
+            return True
+        return False
 
 class Screen(Grid):
     def __init__(self, size: Vector2d, values: list = None):
