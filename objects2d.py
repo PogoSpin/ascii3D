@@ -3,16 +3,19 @@ class Vector2d:
         self.x = x
         self.y = y
 
-    def __add__(self, other):
+    def __add__(self, other: 'Vector2d') -> 'Vector2d':
         if isinstance(other, Vector2d):
             return Vector2d(self.x + other.x, self.y + other.y)
         return NotImplemented
         
-    def __sub__(self, other):
+    def __sub__(self, other: 'Vector2d') -> 'Vector2d':
         if isinstance(other, Vector2d):
             return Vector2d(self.x - other.x, self.y - other.y)
         return NotImplemented
     
+    def dot(self, other: 'Vector2d') -> float:
+        return self.x * other.x + self.y * other.y
+
     def __repr__(self) -> str:
         return f'({self.x}, {self.y})'
 
