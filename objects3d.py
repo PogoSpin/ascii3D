@@ -1,18 +1,34 @@
+from math import sqrt
+
 class Vector3d:
     def __init__(self, x: float, y: float, z: float):
         self.x = x
         self.y = y
         self.z = z
 
-    def __add__(self, other):
+    def __add__(self, other: 'Vector3d') -> 'Vector3d':
         if isinstance(other, Vector3d):
             return Vector3d(self.x + other.x, self.y + other.y, self.z + other.z)
         return NotImplemented
         
-    def __sub__(self, other):
+    def __sub__(self, other: 'Vector3d') -> 'Vector3d':
         if isinstance(other, Vector3d):
             return Vector3d(self.x - other.x, self.y - other.y, self.z - other.z)
         return NotImplemented
+    
+    def dot(self, other: 'Vector3d') -> float:
+        return (self.x * other.x) + (self.y * other.y) + (self.z * other.z)
+    
+    def cross(self, other: 'Vector3d') -> 'Vector3d':
+        return Vector3d(
+            self.y * other.z - self.z * other.y,
+            self.z * other.x - self.x * other.z,
+            self.x * other.y - self.y * other.x
+        )
+    
+    def magnitude(self) -> float:
+        return sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
+
     
     def __repr__(self) -> str:
         return f'({self.x}, {self.y}, {self.z})'
