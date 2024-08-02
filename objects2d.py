@@ -1,3 +1,5 @@
+from math import sqrt
+
 class Vector2d:
     def __init__(self, x: float, y: float):
         self.x = x
@@ -15,6 +17,9 @@ class Vector2d:
     
     def dot(self, other: 'Vector2d') -> float:
         return self.x * other.x + self.y * other.y
+    
+    def magnitude(self) -> float:
+        return sqrt(self.x ** 2 + self.y ** 2)
 
     def __repr__(self) -> str:
         return f'({self.x}, {self.y})'
