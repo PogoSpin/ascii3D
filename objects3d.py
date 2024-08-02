@@ -28,7 +28,6 @@ class Vector3d:
     
     def magnitude(self) -> float:
         return sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
-
     
     def __repr__(self) -> str:
         return f'({self.x}, {self.y}, {self.z})'
