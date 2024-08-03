@@ -2,7 +2,9 @@ from objects2d import Vector2d, Screen
 from utils import *
 
 class Renderer:
-    def __init__(self, windowSize: Vector2d, backgroundBrightness: float = 0):        
+    def __init__(self, windowSize: Vector2d, backgroundBrightness: float = 0):
+        self.windowSize = windowSize
+
         self.width = windowSize.x
         self.height = windowSize.y
 
