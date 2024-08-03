@@ -84,8 +84,9 @@ class Grid:
         return False
 
 class Screen(Grid):
-    def __init__(self, size: Vector2d, values: list = None):
-        values = [Pixel(0) for _ in range(size.x * size.y)]
+    def __init__(self, size: Vector2d, values: list = None, defaultBrightnesss: any = 0):
+        if not values:
+            values = [Pixel(defaultBrightnesss) for _ in range(size.x * size.y)]
         super().__init__(size, values)
 
 class Triangle:
