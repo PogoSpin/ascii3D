@@ -2,9 +2,11 @@ from objects2d import Vector2d, Screen
 from utils import *
 
 class Renderer:
-    def __init__(self, windowSize: Vector2d):
+    def __init__(self, windowSize: Vector2d, backgroundBrightness: float = 0):        
         self.width = windowSize.x
         self.height = windowSize.y
+
+        self.backgroundBrightness = backgroundBrightness
 
         self.screen = Screen(windowSize)
 
@@ -26,6 +28,10 @@ class Renderer:
         # print the text
         print(text)
 
+    def changeBackgroundBrightness(self, brightness):
+        self.backgroundBrightness = brightness
+        self.screen = Screen(self.windowSize)
+
     class Draw:
         def __init__(self, screen: Screen):
             self.screen = screen
@@ -40,7 +46,7 @@ class Renderer:
                 pass
 
         def erase(self, pos: Vector2d):
-            self.screen.get(pos).setBrightness(0)
+            self.screen.get(pos).setBrightness(self.screen.defaultPixelBrightness)
 
         def line(self, pos1: Vector2d, pos2: Vector2d):
             pixelsOn = bresenhamLine(pos1, pos2)
