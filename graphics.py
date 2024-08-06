@@ -1,5 +1,5 @@
 from objects3d import Vector3d
-from objects2d import Vector2d
+from objects2d import Vector2d, Screen
 from render import Renderer
 
 # camera fov
@@ -14,9 +14,9 @@ class Camera:
         self.fov = fov
 
 class World:
-    def __init__(self, objects: set = set()):
+    def __init__(self, objects: set = set(), backgroundBrightness: float = 0):
         self.objects = objects
-        self.beckGroundBrightness = 0
+        self.backgroundBrightness = backgroundBrightness
 
         # other atributes of the world
 
@@ -24,6 +24,8 @@ class Graphics:
     def __init__(self, world: World, renderer: Renderer):
         self.world = world
         self.renderer = renderer
+
+        self.renderer.changeBackgroundBrightness(self.world.backgroundBrightness)
 
     def renderWorld(self):
         for screenspaceObjectPositions in self.projectWorld():
