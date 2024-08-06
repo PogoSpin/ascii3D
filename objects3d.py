@@ -47,8 +47,14 @@ class Cube:
         else:
             self.size = Vector3d(size, size, size)
 
-        self.verticies = [self.pos, self.pos + Vector3d(self.size.x, 0, 0), self.pos + Vector3d(0, self.size.y, 0), 
-                          self.pos + Vector3d(self.size.x, self.size.y, 0), self.pos + Vector3d(0, 0, self.size.z), 
-                          self.pos + Vector3d(self.size.x, 0, self.size.z), self.pos + Vector3d(0, self.size.y, self.size.z), 
-                          self.pos + self.size]
+        self.verticies = self.calcVerticies()
         
+    def setPos(self, pos):
+        self.pos = pos
+        self.verticies = self.calcVerticies()
+
+    def calcVerticies(self):
+        return [self.pos, self.pos + Vector3d(self.size.x, 0, 0), self.pos + Vector3d(0, self.size.y, 0), 
+                self.pos + Vector3d(self.size.x, self.size.y, 0), self.pos + Vector3d(0, 0, self.size.z), 
+                self.pos + Vector3d(self.size.x, 0, self.size.z), self.pos + Vector3d(0, self.size.y, self.size.z), 
+                self.pos + self.size]
