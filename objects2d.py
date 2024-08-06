@@ -25,7 +25,7 @@ class Vector2d:
         return f'({self.x}, {self.y})'
 
 class Pixel:
-    charset = [' ', '.', ':', '-', '=', '+', '#', '@']
+    charset = [' ', '.', ':', '-', '=', 'P', '#', '@']
 
     def __init__(self, brightness: float = 0):
         self.brightness = brightness  # 0-1
