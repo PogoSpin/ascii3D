@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, floor
 
 class Vector2d:
     def __init__(self, x: float, y: float):
@@ -39,7 +39,7 @@ class Pixel:
         self.char = Pixel.getCharFromBrightness(self.brightness)
     
     def getCharFromBrightness(brightness: float) -> str:
-        return Pixel.charset[round(brightness * (len(Pixel.charset) - 1))]
+        return Pixel.charset[floor(brightness * (len(Pixel.charset) - 1))]
 
 class Grid:
     def __init__(self, size: Vector2d, values: list = None, initialValues = None):
