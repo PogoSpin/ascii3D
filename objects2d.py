@@ -26,6 +26,7 @@ class Vector2d:
 
 class Pixel:
     charset = [' ', '.', ':', '-', '=', 'P', '#', '@']
+    charsetLen = len(charset)
 
     def __init__(self, brightness: float = 0):
         self.brightness = brightness  # 0-1
@@ -39,7 +40,7 @@ class Pixel:
         self.char = Pixel.getCharFromBrightness(self.brightness)
     
     def getCharFromBrightness(brightness: float) -> str:
-        return Pixel.charset[floor(brightness * len(Pixel.charset))]
+        return Pixel.charset[floor(brightness * Pixel.charsetLen)]
 
 class Grid:
     def __init__(self, size: Vector2d, values: list = None, initialValues = None):
