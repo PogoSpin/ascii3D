@@ -12,7 +12,7 @@ class Renderer:
 
         self.screen = Screen(windowSize, backgroundBrightness)
 
-        self.draw = self.Draw(self.screen)
+        self.draw = self.Draw(self)
 
     def display(self):
         # print to screen
@@ -33,23 +33,23 @@ class Renderer:
     def changeBackgroundBrightness(self, brightness):
         self.backgroundBrightness = brightness
         self.screen = Screen(self.windowSize, defaultBrightnesss = brightness)
-        self.draw = self.Draw(self.screen)
+        self.draw = self.Draw(self)
 
     class Draw:
-        def __init__(self, screen: Screen):
-            self.screen = screen
+        def __init__(self, renderer: 'Renderer'):
+            self.renderer = renderer
 
             self.changes = []
 
         def point(self, pos: Vector2d):
             try:
-                self.screen.get(pos).setBrightness(1)
+                self.renderer.screen.get(pos).setBrightness(0.99)
                 self.changes.append(pos)
             except:
                 pass
 
         def erase(self, pos: Vector2d):
-            self.screen.get(pos).setBrightness(self.screen.defaultPixelBrightness)
+            self.renderer.screen.get(pos).setBrightness(self.renderer.backgroundBrightness)
 
         def line(self, pos1: Vector2d, pos2: Vector2d):
             pixelsOn = bresenhamLine(pos1, pos2)
