@@ -32,9 +32,9 @@ class Graphics:
 
     def renderWorld(self):
         for screenspaceObjectPositions in self.projectWorld():
-            for point in screenspaceObjectPositions:
-                new = Vector2d(round((point.x + 1) * self.renderer.width / 2), round((point.y + 1) * self.renderer.height / 2))
-                self.renderer.draw.point(new)
+            for normalizedPoint in screenspaceObjectPositions:
+                pointInWindowCoords = self.normalizedPointToWindowCoords(normalizedPoint)
+                self.renderer.draw.point(pointInWindowCoords)
 
     def projectWorld(self) -> list[list]:
         projectedObjects = []
@@ -50,8 +50,6 @@ class Graphics:
         return projectedObjects
 
     def projectToScreenspace(self, position: Vector3d) -> Vector2d:
-        # code to project 3d position to 2d screenspace point
-        # for now, just passing through 3d position and ignoring z component
         return Vector2d((2 * self.cameraAngleToPosX(position)) / self.camera.fov, (2 * self.cameraAngleToPosY(position)) / self.camera.fov)
     
     def cameraAngleToPosX(self, pointPos):
@@ -59,3 +57,6 @@ class Graphics:
     
     def cameraAngleToPosY(self, pointPos):
         return tanh((pointPos.y - self.camera.position.y) / (pointPos.z - self.camera.position.z))
+    
+    def normalizedPointToWindowCoords(self, pointPos):
+        return Vector2d(round((pointPos.x + 1) * self.renderer.width / 2), round((pointPos.y + 1) * self.renderer.height / 2))
