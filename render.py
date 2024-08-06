@@ -10,7 +10,7 @@ class Renderer:
 
         self.backgroundBrightness = backgroundBrightness
 
-        self.screen = Screen(windowSize, backgroundBrightness)
+        self.screen = Screen(windowSize, defaultBrightnesss = backgroundBrightness)
 
         self.draw = self.Draw(self)
 
