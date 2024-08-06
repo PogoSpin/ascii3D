@@ -10,7 +10,7 @@ class Renderer:
 
         self.backgroundBrightness = backgroundBrightness
 
-        self.screen = Screen(windowSize)
+        self.screen = Screen(windowSize, backgroundBrightness)
 
         self.draw = self.Draw(self.screen)
 
@@ -32,7 +32,8 @@ class Renderer:
 
     def changeBackgroundBrightness(self, brightness):
         self.backgroundBrightness = brightness
-        self.screen = Screen(self.windowSize, defaultBrightnesss = self.backgroundBrightness)
+        self.screen = Screen(self.windowSize, defaultBrightnesss = brightness)
+        self.draw = self.Draw(self.screen)
 
     class Draw:
         def __init__(self, screen: Screen):
