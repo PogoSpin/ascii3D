@@ -40,7 +40,10 @@ class Pixel:
         self.char = Pixel.getCharFromBrightness(self.brightness)
     
     def getCharFromBrightness(brightness: float) -> str:
-        return Pixel.charset[floor(brightness * Pixel.charsetLen)]
+        if brightness != 1:
+            return Pixel.charset[floor(brightness * Pixel.charsetLen)]
+        else:
+            return Pixel.charset[-1]
 
 class Grid:
     def __init__(self, size: Vector2d, values: list = None, initialValues = None):
