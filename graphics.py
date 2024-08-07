@@ -1,7 +1,7 @@
 from objects3d import Vector3d
 from objects2d import Vector2d, Screen
 from render import Renderer
-from math import tanh, radians
+from math import tan, radians, tanh
 
 # camera fov
 # camera distance
@@ -13,6 +13,7 @@ class Camera:
         self.orientation = orientation
         
         self.fov = fov
+        self.distToScreen = 1 / (tan(fov / 2))
 
 class World:
     def __init__(self, objects: set = set(), backgroundBrightness: float = 0):
@@ -28,7 +29,7 @@ class Graphics:
 
         self.renderer.changeBackgroundBrightness(self.world.backgroundBrightness)
 
-        self.camera = Camera(Vector3d(0, 0, 0), None, radians(90))
+        self.camera = Camera(Vector3d(0, 0, 0), None, radians(100))
 
     def renderWorld(self):
         'Using Renderer, draw all objects in world space to screen'
@@ -57,15 +58,7 @@ class Graphics:
 
     def projectToScreenspace(self, position: Vector3d) -> Vector2d:
         'Convert 3d coordinate to 2d normalized screenspace'
-        return Vector2d((2 * self.cameraAngleToPosX(position)) / self.camera.fov, (2 * self.cameraAngleToPosY(position)) / self.camera.fov)
-    
-    def cameraAngleToPosX(self, pointPos: Vector3d) -> float:
-        'Find angle along x-z plane from camera to point'
-        return tanh((pointPos.x - self.camera.position.x) / (pointPos.z - self.camera.position.z))
-    
-    def cameraAngleToPosY(self, pointPos: Vector3d) -> float:
-        'Find angle along y-z place from camera to point'
-        return tanh((pointPos.y - self.camera.position.y) / (pointPos.z - self.camera.position.z))
+        return Vector2d(self.camera.distToScreen * ((position.x - self.camera.position.x) / (position.z - self.camera.position.z)), self.camera.distToScreen * ((position.y - self.camera.position.y) / (position.z - self.camera.position.z)))
     
     # convert normalized coords, IE x and y from -1 to 1, (0, 0) = center
     def normalizedPointToWindowCoords(self, pointPos: Vector2d) -> Vector2d:
