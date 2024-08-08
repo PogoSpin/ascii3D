@@ -16,6 +16,17 @@ class Vector3d:
             return Vector3d(self.x - other.x, self.y - other.y, self.z - other.z)
         return NotImplemented
     
+    def __mul__(self, other: 'Vector3d') -> 'Vector3d':
+        if isinstance(other, Vector3d):
+            return Vector3d(self.x * other.x, self.y * other.y, self.z * other.z)
+        return NotImplemented
+    
+    def __truediv__(self, other: 'Vector3d') -> 'Vector3d':
+        if isinstance(other, Vector3d):
+            return Vector3d(self.x / other.x, self.y / other.y, self.z / other.z)
+        return NotImplemented
+    
+    
     def dot(self, other: 'Vector3d') -> float:
         return (self.x * other.x) + (self.y * other.y) + (self.z * other.z)
     

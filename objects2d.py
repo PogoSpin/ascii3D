@@ -15,6 +15,16 @@ class Vector2d:
             return Vector2d(self.x - other.x, self.y - other.y)
         return NotImplemented
     
+    def __mul__(self, other: 'Vector2d') -> 'Vector2d':
+        if isinstance(other, Vector2d):
+            return Vector2d(self.x * other.x, self.y * other.y)
+        return NotImplemented
+    
+    def __truediv__(self, other: 'Vector2d') -> 'Vector2d':
+        if isinstance(other, Vector2d):
+            return Vector2d(self.x / other.x, self.y / other.y)
+        return NotImplemented
+    
     def dot(self, other: 'Vector2d') -> float:
         return self.x * other.x + self.y * other.y
     
